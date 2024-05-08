@@ -13,6 +13,8 @@
                 </div>
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <a href="{{ route('playlist.index') }}">PLAYLISTS</a>
+                    <br>
+                    <a href="{{ route('video.index') }}">VIDEOS</a>
                 </div>
             </div>
         </div>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PlaylistController;
+use App\Http\Controllers\VideoController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -31,6 +32,7 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'verified'])->group(function (){
     Route::resource('playlist', PlaylistController::class);
+    Route::resource('video', VideoController::class);
 });
 
 require __DIR__.'/auth.php';
