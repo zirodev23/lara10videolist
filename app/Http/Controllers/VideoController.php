@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Video;
+use App\Models\Playlist;
 use Illuminate\Http\Request;
 
 class VideoController extends Controller
@@ -62,5 +63,31 @@ class VideoController extends Controller
     public function destroy(Video $video)
     {
         //
+    }
+
+    public function search(Request $request)
+    {
+        $term = $request->query('term');
+        $results = Video::where('title', 'like', "%$term%")->get();
+
+        $playlist = Playlist::find($request["pid"]);
+        return view('video.searchlistitem', ['videos' => $results, 'playlist' => $playlist]);
+    }
+
+    public function addtoplaylist(Request $request)
+    {
+        $playlist = Playlist::find($request["pid"]);
+        $video = Video::find($request["vid"]);
+
+        $playlist->videos()->attach($video);
+        return view('video.showlistitem', ['playlist' => $playlist, 'video' => $video]);
+    }
+
+    public function removefromplaylist(Request $request)
+    {
+        $playlist = Playlist::find($request["pid"]);
+        $video = Video::find($request["vid"]);
+        
+        $playlist->videos()->detach($video);
     }
 }

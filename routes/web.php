@@ -33,6 +33,9 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'verified'])->group(function (){
     Route::resource('playlist', PlaylistController::class);
     Route::resource('video', VideoController::class);
+    Route::get('/videosearch', [VideoController::class, 'search']);
+    Route::post('/addtoplaylist', [VideoController::class, 'addtoplaylist']);
+    Route::post('/removefromplaylist', [VideoController::class, 'removefromplaylist']);
 });
 
 require __DIR__.'/auth.php';
